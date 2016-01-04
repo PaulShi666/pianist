@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>pianist</title>
+    <link href="img/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #000000;
+        }
+
+        .keys-container {
+            height: 264px;
+            position: relative;
+        }
+
+        .keys-white-container {
+            display: -webkit-box;
+            position: absolute;
+            bottom: 0
+        }
+
+        .key-white {
+            width: 62px;
+            height: 264px;
+            margin-right: 2px;
+            background: url(img/key-white.png) no-repeat;
+            background-size: cover;
+        }
+
+        .key-white.pressed {
+
+            background: url(img/key-white-pressed.png) no-repeat;
+            background-size: cover;
+        }
+
+        .keys-black-container {
+            display: -webkit-box;
+            position: absolute;
+            top: 0
+        }
+
+        .key-black:nth-child(1) {
+            margin-left: 45px;
+        }
+
+        .key-black:nth-child(7n+3) {
+            visibility: hidden;
+        }
+
+        .key-black:nth-child(7n+7) {
+            visibility: hidden;
+        }
+
+        .key-black {
+            width: 38px;
+            height: 152px;
+            margin: 0 13px;
+            background: url(img/key-black.png) no-repeat;
+            background-size: cover;
+        }
+
+        .key-black.pressed {
+
+            background: url(img/key-black-pressed.png) no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<img src="img/key-black-pressed.png" alt="" style="display: none">
+<img src="img/key-white-pressed.png" alt="" style="display: none">
+<!--样板图-->
+<!--<img src="img/Screenshot_2015-12-30-18-03-15.png" width="100%" alt="">-->
+
+<div class="keys-container">
+    <div class="keys-white-container">
+        <div class="key-white" data-pitch="40"></div>
+        <div class="key-white" data-pitch="42"></div>
+        <div class="key-white" data-pitch="44"></div>
+        <div class="key-white" data-pitch="45"></div>
+        <div class="key-white" data-pitch="47"></div>
+        <div class="key-white" data-pitch="49"></div>
+        <div class="key-white" data-pitch="51"></div>
+        <div class="key-white" data-pitch="52"></div>
+    </div>
+    <div class="keys-black-container">
+
+        <div class="key-black" data-pitch="41"></div>
+        <div class="key-black" data-pitch="43"></div>
+        <div class="key-black" data-pitch=""></div>
+        <div class="key-black" data-pitch="46"></div>
+        <div class="key-black" data-pitch="48"></div>
+
+        <div class="key-black" data-pitch="50"></div>
+        <div class="key-black"></div>
+
+    </div>
+</div>
+
+
+<audio src="audio/piano/40.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/41.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/42.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/43.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/44.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/45.mp3" controls="controls" preload="auto"></audio>
+<audio src="audio/piano/46.mp3" controls="controls" preload="auto"></audio>
+</audio>
+<script>
+    window.audio= {};
+for(var i =40 ;i<=52;i++){
+    window.audio[i] = document.createElement("audio");
+    window.audio[i].src = "audio/piano/"+ i +".mp3";
+    window.audio[i].setAttribute("preload","auto");
+}
+
+//    var audio = document.createElement("audio");
+//    audio.src = "audio/piano/40.mp3";
+//    audio.setAttribute("preload","auto");
+//    document.body.appendChild(audio);
+    console.log(window.audio);
+//console.log(document.getElementsByTagName("audio"));
+    //    alert(window.screen.height);
+    var keyWhiteDom = document.getElementsByClassName("key-white");
+
+    //    keyDom.addEventListener("touchstart",function(e){
+    //        console.log(this.className);
+    //
+    //        this.className="key-white pressed";
+    //    });
+    //    keyDom.addEventListener("touchend",function(e){
+    //        console.log(this.className);
+    //        this.className="key-white";
+    //    });
+    for (var i = 0; i < keyWhiteDom.length; i++) {
+//        console.log(keyWhiteDom[i]);
+        keyWhiteDom[i].addEventListener("touchstart", function (e) {
+            e.preventDefault();
+            console.log(this.className);
+
+            this.className = "key-white pressed";
+            console.log(this.getAttribute("data-pitch"));
+            var pitch = this.getAttribute("data-pitch");
+
+            console.log( window.audio);
+            window.audio[pitch].play();
+
+        });
+        keyWhiteDom[i].addEventListener("touchend", function (e) {
+            console.log(this.className);
+            this.className = "key-white";
+            var pitch = this.getAttribute("data-pitch");
+
+            console.log( window.audio);
+            window.audio[pitch].stop();
+        })
+    }
+    var keyBlackDom = document.getElementsByClassName("key-black");
+    for (var i = 0; i < keyBlackDom.length; i++) {
+//        console.log(keyWhiteDom[i]);
+        keyBlackDom[i].addEventListener("touchstart", function (e) {
+            e.preventDefault();
+            console.log(this.className);
+            this.className = "key-white pressed";
+            console.log(this.getAttribute("data-pitch"));
+            var pitch = this.getAttribute("data-pitch");
+            audio.src = "audio/piano/" + pitch + ".mp3";
+            audio.play();
+            this.className = "key-black pressed";
+
+        });
+        keyBlackDom[i].addEventListener("touchend", function (e) {
+            console.log(this.className);
+            this.className = "key-black";
+        })
+    }
+    function keyPressed(e) {
+
+    }
+    HTMLAudioElement.prototype.stop= function(e){
+        this.pause();
+        this.currentTime = 0.0;
+    }
+</script>
+</body>
+</html>
