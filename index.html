@@ -106,27 +106,28 @@
 
 
 <audio src="audio/piano/40.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/41.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/42.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/43.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/44.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/45.mp3" controls="controls" preload="auto"></audio>
-<audio src="audio/piano/46.mp3" controls="controls" preload="auto"></audio>
+<!--<audio src="audio/piano/41.mp3" controls="controls" preload="auto"></audio>-->
+<!--<audio src="audio/piano/42.mp3" controls="controls" preload="auto"></audio>-->
+<!--<audio src="audio/piano/43.mp3" controls="controls" preload="auto"></audio>-->
+<!--<audio src="audio/piano/44.mp3" controls="controls" preload="auto"></audio>-->
+<!--<audio src="audio/piano/45.mp3" controls="controls" preload="auto"></audio>-->
+<!--<audio src="audio/piano/46.mp3" controls="controls" preload="auto"></audio>-->
 </audio>
 <script>
-    window.audio= {};
-for(var i =40 ;i<=52;i++){
-    window.audio[i] = document.createElement("audio");
-    window.audio[i].src = "audio/piano/"+ i +".mp3";
-    window.audio[i].setAttribute("preload","auto");
-}
+    window.audio = {};
+    for (i = 40; i <= 40; i++) {
+        window.audio[i] = document.createElement("audio");
+        window.audio[i].src = "audio/piano/" + i + ".mp3";
+        window.audio[i].setAttribute("preload", "auto");
+    }
 
-//    var audio = document.createElement("audio");
-//    audio.src = "audio/piano/40.mp3";
-//    audio.setAttribute("preload","auto");
-//    document.body.appendChild(audio);
-    console.log(window.audio);
-//console.log(document.getElementsByTagName("audio"));
+
+    //    var audio = document.createElement("audio");
+    //    audio.src = "audio/piano/40.mp3";
+    //    audio.setAttribute("preload","auto");
+    //    document.body.appendChild(audio);
+
+    //console.log(document.getElementsByTagName("audio"));
     //    alert(window.screen.height);
     var keyWhiteDom = document.getElementsByClassName("key-white");
 
@@ -142,15 +143,25 @@ for(var i =40 ;i<=52;i++){
     for (var i = 0; i < keyWhiteDom.length; i++) {
 //        console.log(keyWhiteDom[i]);
         keyWhiteDom[i].addEventListener("touchstart", function (e) {
+//            console.time("audioPlay");
+            var audioStarTime = new Date().getTime();
+            console.log(audioStarTime);
             e.preventDefault();
-            console.log(this.className);
+
 
             this.className = "key-white pressed";
-            console.log(this.getAttribute("data-pitch"));
             var pitch = this.getAttribute("data-pitch");
 
-            console.log( window.audio);
-            window.audio[pitch].play();
+//            window.audio[pitch].goToAndPlay(0.033);
+//            console.log(document.getElementById("audio")[0]);
+            var audioDom =document.getElementsByTagName("audio");
+//            console.log(new Date().getTime());
+
+            audioDom[0].goToAndPlay();
+
+//            alert( (new Date()).getTime()-audioStarTime);
+
+
 
         });
         keyWhiteDom[i].addEventListener("touchend", function (e) {
@@ -158,33 +169,42 @@ for(var i =40 ;i<=52;i++){
             this.className = "key-white";
             var pitch = this.getAttribute("data-pitch");
 
-            console.log( window.audio);
-            window.audio[pitch].stop();
+//            console.log( window.audio);
+//            window.audio[pitch].stop();
         })
     }
-    var keyBlackDom = document.getElementsByClassName("key-black");
-    for (var i = 0; i < keyBlackDom.length; i++) {
-//        console.log(keyWhiteDom[i]);
-        keyBlackDom[i].addEventListener("touchstart", function (e) {
-            e.preventDefault();
-            console.log(this.className);
-            this.className = "key-white pressed";
-            console.log(this.getAttribute("data-pitch"));
-            var pitch = this.getAttribute("data-pitch");
-            audio.src = "audio/piano/" + pitch + ".mp3";
-            audio.play();
-            this.className = "key-black pressed";
-
-        });
-        keyBlackDom[i].addEventListener("touchend", function (e) {
-            console.log(this.className);
-            this.className = "key-black";
-        })
-    }
+    //    var keyBlackDom = document.getElementsByClassName("key-black");
+    //    for (var i = 0; i < keyBlackDom.length; i++) {
+    ////        console.log(keyWhiteDom[i]);
+    //        keyBlackDom[i].addEventListener("touchstart", function (e) {
+    //            e.preventDefault();
+    //            console.log(this.className);
+    //            this.className = "key-black pressed";
+    //            console.log(this.getAttribute("data-pitch"));
+    //            var pitch = this.getAttribute("data-pitch");
+    //            audio.src = "audio/piano/" + pitch + ".mp3";
+    //            audio.play();
+    //            this.className = "key-black pressed";
+    //        });
+    //        keyBlackDom[i].addEventListener("touchend", function (e) {
+    //            console.log(this.className);
+    //            this.className = "key-black";
+    //        })
+    //    }
     function keyPressed(e) {
 
     }
-    HTMLAudioElement.prototype.stop= function(e){
+    HTMLAudioElement.prototype.goToAndPlay = function () {
+        var defaultStartTime =  0.0345,
+        var args = arguments;
+
+        this.currentTime = args[0] || defaultStartTime;
+        this.play();
+//        this.currentTime = 0.3;
+//        this.play();
+
+    };
+    HTMLAudioElement.prototype.stop = function (e) {
         this.pause();
         this.currentTime = 0.0;
     }
