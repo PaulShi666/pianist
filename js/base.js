@@ -26,6 +26,24 @@ NodeList.prototype.on = function(){
     }
 };
 P.console = {
+    timers:{},
+    time:function(){
+        var timerName =arguments[0];
+        if(!P["console"]["timers"][timerName]){
+            P["console"]["timers"][timerName] = {};
+            P["console"]["timers"][timerName]["start"]= new Date().getTime();
+        }
+    },
+    timeEnd:function(){
+        var timerName =arguments[0];
+        if(P["console"]["timers"][timerName]){
+            P["console"]["timers"][timerName]["End"]= new Date().getTime();
+            var time =  P["console"]["timers"][timerName]["End"] - P["console"]["timers"][timerName]["start"];
+            alert("耗时" + time+"ms");
+        }
+
+    }
+
 
 
 };

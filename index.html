@@ -14,13 +14,12 @@
 
         .keys-container {
             height: 264px;
-            position: relative;
+            position: absolute;
+            bottom: 0;
         }
 
         .keys-white-container {
             display: -webkit-box;
-            position: absolute;
-            bottom: 0
         }
 
         .key-white {
@@ -105,28 +104,17 @@
 </div>
 
 
-<!--<audio src="audio/piano/40.mp3" controls="controls" preload="auto" ></audio>-->
-<!--<audio src="audio/piano/40.wav" controls="controls" preload="auto" ></audio>-->
-<!--<audio src="audio/piano/41.mp3" controls="controls" preload="auto"></audio>-->
-<!--<audio src="audio/piano/42.mp3" controls="controls" preload="auto"></audio>-->
-<!--<audio src="audio/piano/43.mp3" controls="controls" preload="auto"></audio>-->
-<!--<audio src="audio/piano/44.mp3" controls="controls" preload="auto"></audio>-->
-<!--<audio src="audio/piano/45.mp3" controls="controls" preload="auto"></audio>-->
-<!--<audio src="audio/piano/46.mp3" controls="controls" preload="auto"></audio>-->
-</audio>
 <script src="js/base.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/view.js"></script>
 <script>
-    window.onload = function(){
+    window.onload = function () {
+//        P.console.time("timer1");
+//        P.console.timeEnd("timer1");
         audioInit();
         viewInit();
+
     };
-
-
-
-
-
 
 
 </script>
