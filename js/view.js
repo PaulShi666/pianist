@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2016/1/14.
+ * Created by Paul on 2016/1/14.
  */
 //视图层
 function viewInit(){
