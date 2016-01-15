@@ -23,3 +23,6 @@ function viewInit(){
     });
 
 }
+function isTransverse(){
+
+}

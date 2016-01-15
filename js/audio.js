@@ -21,27 +21,38 @@ function audioInit() {
         context,
         [
             'audio/piano/40.mp3',
+            'audio/piano/41.mp3',
             'audio/piano/42.mp3',
+            'audio/piano/43.mp3',
             'audio/piano/44.mp3',
             'audio/piano/45.mp3',
+            'audio/piano/46.mp3',
             'audio/piano/47.mp3',
+            'audio/piano/48.mp3',
             'audio/piano/49.mp3',
+            'audio/piano/50.mp3',
             'audio/piano/51.mp3',
-            'audio/piano/52.mp3'
+            'audio/piano/52.mp3',
+            'audio/piano/53.mp3',
+            'audio/piano/54.mp3',
+            'audio/piano/55.mp3',
+            'audio/piano/56.mp3',
+            'audio/piano/57.mp3'
         ],
         finishedLoading
     );
-
+    console.log(bufferLoader);
     bufferLoader.load();
     function finishedLoading(bufferList) {
 
-        var keyWhiteDom = document.getElementsByClassName("key-white");
+        var keyWhiteDom = document.getElementsByClassName("key");
         for (var i = 0; i < keyWhiteDom.length; i++) {
 
             keyWhiteDom[i].addEventListener("touchstart", function (e) {
-                var index = this.id;
+                var pitch = this.getAttribute("data-pitch");
+                console.log(pitch);
                 var source = context.createBufferSource();
-                source.buffer = bufferList[index];
+                source.buffer = bufferList[pitch];
                 source.connect(context.destination);
                 source.start(0);
 
@@ -49,9 +60,8 @@ function audioInit() {
         }
     }
 
-
 }
-
+//BufferLoader对象构造(xhr请求、decode、buffer)
 function BufferLoader(context, urlList, callback) {
     this.context = context;
     this.urlList = urlList;
@@ -95,8 +105,14 @@ BufferLoader.prototype.loadBuffer = function (url, index) {
 }
 
 BufferLoader.prototype.load = function () {
-    for (var i = 0; i < this.urlList.length; ++i)
-        this.loadBuffer(this.urlList[i], i);
+    for (var i = 0; i < this.urlList.length; ++i){
+        //console.log(this.urlList[i]);
+        var fileRegex = /[^\/]\d/;
+        var fileName = fileRegex.exec(this.urlList[i])[0];
+
+        this.loadBuffer(this.urlList[i], fileName);
+    }
+
 }
 
 

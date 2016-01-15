@@ -80,25 +80,35 @@
 
 <div class="keys-container">
     <div class="keys-white-container">
-        <div class="key-white" id="0" data-pitch="40"></div>
-        <div class="key-white" id="1" data-pitch="42"></div>
-        <div class="key-white" id="2" data-pitch="44"></div>
-        <div class="key-white" id="3" data-pitch="45"></div>
-        <div class="key-white" id="4" data-pitch="47"></div>
-        <div class="key-white" id="5" data-pitch="49"></div>
-        <div class="key-white" id="6" data-pitch="51"></div>
-        <div class="key-white" id="7" data-pitch="52"></div>
+        <div class="key key-white" id="0" data-pitch="40"></div>
+        <div class="key key-white" id="1" data-pitch="42"></div>
+        <div class="key key-white" id="2" data-pitch="44"></div>
+        <div class="key key-white" id="3" data-pitch="45"></div>
+        <div class="key key-white" id="4" data-pitch="47"></div>
+        <div class="key key-white" id="5" data-pitch="49"></div>
+        <div class="key key-white" id="6" data-pitch="51"></div>
+        <div class="key key-white" id="7" data-pitch="52"></div>
+        <div class="key key-white" id="8" data-pitch="54"></div>
+        <div class="key key-white" id="9" data-pitch="56"></div>
+        <div class="key key-white" id="10" data-pitch="57"></div>
     </div>
     <div class="keys-black-container">
 
-        <div class="key-black" data-pitch="41"></div>
-        <div class="key-black" data-pitch="43"></div>
-        <div class="key-black" data-pitch=""></div>
-        <div class="key-black" data-pitch="46"></div>
-        <div class="key-black" data-pitch="48"></div>
+        <div class="key key-black" data-pitch="41"></div>
+        <div class="key key-black" data-pitch="43"></div>
 
-        <div class="key-black" data-pitch="50"></div>
-        <div class="key-black"></div>
+        <div class="key key-black"></div>
+
+        <div class="key key-black" data-pitch="46"></div>
+        <div class="key key-black" data-pitch="48"></div>
+        <div class="key key-black" data-pitch="50"></div>
+
+        <div class="key key-black"></div>
+
+        <div class="key key-black" data-pitch="53"></div>
+        <div class="key key-black" data-pitch="55"></div>
+
+        <div class="key key-black"></div>
 
     </div>
 </div>
@@ -108,12 +118,11 @@
 <script src="js/audio.js"></script>
 <script src="js/view.js"></script>
 <script>
+
     window.onload = function () {
-//        P.console.time("timer1");
-//        P.console.timeEnd("timer1");
         audioInit();
         viewInit();
-
+        isTransverse();
     };
 
 
